@@ -1,0 +1,20 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamarob/rock-paper-scissors.git"
+  },
+  "keywords": [],
+  "author": "Jan Robert",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jamarob/rock-paper-scissors/issues"
+  },
+  "homepage": "https://github.com/jamarob/rock-paper-scissors#readme"
+}
