@@ -1,0 +1,43 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  background: #333;
+  color: gold;
+}
+
+.insert {
+  font-size: 48px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 100%;
+  flex-grow: 1;
+}
+
+img.hidden {
+  display: none;
+}
+
+.restart {
+  margin: 12px;
+  align-self: stretch;
+  font-size: 48px;
+  background: none;
+  color: inherit;
+  border-color: inherit;
+  border-radius: 8px;
+}
+
+.restart:disabled {
+  color: grey;
+  border-color: grey;
+}
