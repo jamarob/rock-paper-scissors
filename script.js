@@ -7,30 +7,30 @@ if (window.DeviceMotionEvent) {
   document.body.innerHTML = '<p>DeviceMotionEvent Not Supported</p>'
 }
 
-const images = [
-  get('[data-js=rock]'),
-  get('[data-js=paper]'),
-  get('[data-js=scissors]'),
-]
+document.addEventListener('click', () => {
+  count++
+  showResult()
+})
 
-const insert = get('[data-js=insert]')
-const btnRestart = get('[data-js=restart]')
+const image = get('[data-js=image]')
+const title = get('[data-js=title]')
+const restart = get('[data-js=restart]')
 
-btnRestart.addEventListener('click', reset)
+restart.addEventListener('click', reset)
+
+image.addEventListener('animationend', () => {
+  restart.classList.remove('hidden')
+})
 
 let lastZ
-let count = 0
+let count = -1
 
 function reset() {
   lastZ = undefined
-  count = 0
-  lastCount = -1
-  images.forEach(hide)
-  btnRestart.disabled = true
-}
-
-function hide(htmlEl) {
-  htmlEl.classList.add('hidden')
+  count = -2
+  image.classList.add('hidden')
+  restart.classList.add('hidden')
+  title.textContent = '3 mal schütteln'
 }
 
 function handleAcceleration(z) {
@@ -43,33 +43,27 @@ function handleAcceleration(z) {
     count++
   }
   lastZ = z
+  showResult()
 }
 
-window.requestAnimationFrame(function loop() {
+function showResult() {
   switch (count) {
     case 0:
-      insert.innerHTML = 'SCHNICK'
+      title.textContent = 'Schnick..'
       break
     case 1:
-      insert.innerHTML = 'SCHNACK'
+      title.textContent = '..Schnack..'
       break
     case 2:
-      insert.innerHTML = 'SCHNUCK'
-      break
-    case 3:
-      insert.innerHTML = ''
-      showRockPaperScissors()
+      title.textContent = '..Schnuck!'
+      image.src = randomImage()
+      image.className = 'spin-in'
       count++
-      btnRestart.disabled = false
       break
   }
-
-  window.requestAnimationFrame(loop)
-})
-
-function showRockPaperScissors() {
-  randomImage().classList.remove('hidden')
 }
+
+const images = ['img/paper.png', 'img/rock.png', 'img/scissors.png']
 
 function randomImage() {
   return images[Math.floor(Math.random() * 3)]

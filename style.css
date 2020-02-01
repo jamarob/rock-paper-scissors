@@ -1,43 +1,60 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   padding: 0;
   margin: 0;
   height: 100vh;
   background: #333;
   color: gold;
-}
-
-.insert {
-  font-size: 48px;
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 }
 
 img {
   width: 100%;
-  flex-grow: 1;
 }
 
 img.hidden {
   display: none;
 }
 
-.restart {
+p {
+  margin: 12px 0;
+  font-weight: bold;
+  font-size: 48px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
   margin: 12px;
   align-self: stretch;
   font-size: 48px;
   background: none;
   color: inherit;
   border-color: inherit;
+  border-width: 4px;
   border-radius: 8px;
 }
 
-.restart:disabled {
-  color: grey;
-  border-color: grey;
+button.hidden {
+  visibility: hidden;
+}
+
+.spin-in {
+  animation-duration: 0.5s;
+  animation-name: spin;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(-360deg);
+    width: 0;
+  }
+
+  to {
+    transform: rotate(360deg);
+    width: 100%;
+  }
 }
