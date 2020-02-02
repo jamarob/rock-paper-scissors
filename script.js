@@ -30,7 +30,7 @@ function reset() {
   count = -2
   image.classList.add('hidden')
   restart.classList.add('hidden')
-  title.textContent = '3 mal schütteln'
+  title.textContent = '3 x schütteln'
 }
 
 function handleAcceleration(z) {
