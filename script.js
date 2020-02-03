@@ -7,27 +7,20 @@ if (window.DeviceMotionEvent) {
   document.body.innerHTML = '<p>DeviceMotionEvent Not Supported</p>'
 }
 
-document.addEventListener('click', () => {
-  count++
-  showResult()
-})
-
 const image = get('[data-js=image]')
 const title = get('[data-js=title]')
 const restart = get('[data-js=restart]')
 
+image.addEventListener('animationend', () => restart.classList.remove('hidden'))
 restart.addEventListener('click', reset)
-
-image.addEventListener('animationend', () => {
-  restart.classList.remove('hidden')
-})
 
 let lastZ
 let count = -1
+let shake = false
 
 function reset() {
   lastZ = undefined
-  count = -2
+  count = -1
   image.classList.add('hidden')
   restart.classList.add('hidden')
   title.textContent = '3 x schütteln'
@@ -40,10 +33,9 @@ function handleAcceleration(z) {
   }
   const dZ = Math.abs(Math.abs(lastZ) - Math.abs(z))
   if (dZ > 10) {
-    count++
+    shake = true
   }
   lastZ = z
-  showResult()
 }
 
 function showResult() {
@@ -58,12 +50,30 @@ function showResult() {
       title.textContent = '..Schnuck!'
       image.src = randomImage()
       image.className = 'spin-in'
-      count++
       break
   }
 }
 
 const images = ['img/paper.png', 'img/rock.png', 'img/scissors.png']
+
+const INTERVAL = 750
+
+let timeBefore = 0
+window.requestAnimationFrame(function loop(time) {
+  if (!timeBefore) {
+    timeBefore = time
+  } else {
+    const delta_t = time - timeBefore
+    if (delta_t >= INTERVAL && shake) {
+      count++
+      showResult()
+      shake = false
+      timeBefore = time
+    }
+  }
+
+  window.requestAnimationFrame(loop)
+})
 
 function randomImage() {
   return images[Math.floor(Math.random() * 3)]
