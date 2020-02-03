@@ -7,6 +7,14 @@ if (window.DeviceMotionEvent) {
   document.body.innerHTML = '<p>DeviceMotionEvent Not Supported</p>'
 }
 
+<<<<<<< HEAD
+=======
+//document.addEventListener('click', () => {
+//  count++
+//  shake = true
+//})
+
+>>>>>>> 98ea742c242d34005ff970eb3afa983fcef2d412
 const image = get('[data-js=image]')
 const title = get('[data-js=title]')
 const restart = get('[data-js=restart]')
